@@ -16,21 +16,57 @@
     <![endif]-->
 
 	<style>
-    
 
-		.jumbotron {
-        position:fixed;
-        background-color:#3b3a36;
-       
-        height:fixed;
-        width: fixed;
+        @keyframes circle {
+            
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes updown {
+  to { transform: translateX(150px); }
+}
+
+#rocket {
+  position: absolute;
+  width: 20px; 
+  height: 20px;
+  top: 0; 
+  left: 0; 
+  bottom: 0; 
+  right: 0;
+  margin: auto;
+  position: absolute;
+  display: block;
+  transform-origin: -50% center;
+  animation: circle 4s infinite linear;
+}
+
+#rocket img { 
+    
+    width: 40px; 
+    height: auto;
+    transform-origin: center bottom;
+    animation: updown 2s infinite alternate ease-in-out;
+    margin-top: 10%;
+}
+    
+.jumbotron {
+    top: 0;
+    position:fixed;
+    background-color:#3b3a36;       
+    height:fixed;
+    width: fixed;
 
       }
   
 	  .progress {    
-    position: relative;
+    /*position: relative;
     height: 10px;
-    background: url('http://rubentd.com/img/banana.png');
+    background: url('http://rubentd.com/img/banana.png');*/
     /*background-image:  url(https://cdn2.iconfinder.com/data/icons/thesquid-ink-40-free-flat-icon-pack/64/space-rocket-512.png);*/
 	}
 /*    
@@ -57,9 +93,7 @@
     color: #fff;
     cursor: pointer;
 }
-/*#rocket{
 
-}*/
 #canvas {
     
 }
@@ -90,14 +124,13 @@
 	<div class="container" style="margin-left: 820px; margin-top: 300px; margin-bottom: 100px;">
 		<div class="jumbotron">
             <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</span>
-			  <div id="rocket">
-        <img src="img/rocket0.png" class="img-responsive" alt="progress-rocket" width="50" height="50"  >
-    		 <p style="color:#fff;">Show the progress of profile completion</p>
+			               <canvas id="my_canvas" width="350" height="100" ></canvas>
+              <div id="rocket">
+        <img src="img/rocket00.png" class="" alt="progress-rocket" data-pin-nopin="true" >
+    		
 			 </div>
+              <p style="color:#fff;">Show the progress of profile completion</p>
 
-                
-             <canvas id="my_canvas" width="300" height="100" ></canvas>
-               
 
 					<!--<div class="progress" id="progress-1">
 
@@ -122,7 +155,7 @@
 
 	<script type="text/javascript">
         var ctx = document.getElementById('my_canvas').getContext('2d');
-        var al = 25;
+        var al = 0;
         var start = 3.14;
         var cw = ctx.canvas.width;
         var ch = ctx.canvas.height;
@@ -131,7 +164,7 @@
         function progressSim() {
             diff = ((al/100)* Math.PI*1*10).toFixed(2);
             ctx.clearRect(0,0,cw,ch);
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 10;
             ctx.fillStyle = "#FFF";
             ctx.strokeStyle = "#09F";
             ctx.textAlign = 'center';
@@ -146,7 +179,7 @@
 
         }
 
-        var sim = setInterval(progressSim, 60);
+        var sim = setInterval(progressSim, 90);
 
 
     
